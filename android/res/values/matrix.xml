@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="api">https://matrix.org/_matrix/client/api/v1</string>
+  <string name="room" formatted="false">%21EjJmurdKObENEdstBZ%3Amatrix.org</string>
+  <string name="token"></string>
+</resources>
