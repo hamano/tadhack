@@ -11,6 +11,8 @@ import android.content.ComponentName;
 import android.content.res.Resources;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Menu;
+import android.view.MenuItem;
 
 public class TADHackActivity extends Activity
 {
@@ -73,6 +75,34 @@ public class TADHackActivity extends Activity
             }
         };
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.test_join:
+            if(service != null){
+                service.join();
+            }
+            break;
+        case R.id.test_leave:
+            if(service != null){
+                service.leave();
+            }
+            break;
+        case R.id.test_walk:
+            Log.i(tag, "test walk");
+            break;
+        case R.id.test_run:
+            Log.i(tag, "test run");
+            break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onDestroy() {
