@@ -63,7 +63,7 @@ public class TADHackService extends Service {
         receiver = new PebbleKit.PebbleDataReceiver(appid) {
                 @Override
                 public void receiveData(Context context, int transactionId, PebbleDictionary data) {
-                    Log.i(tag, "recv: ");
+                    Log.i(tag, "recv pebble: ");
                     Long value = data.getUnsignedIntegerAsLong(0);
                     if(value != null){
                         int action = value.intValue();
@@ -100,25 +100,6 @@ public class TADHackService extends Service {
         return true;
     }
 
-    private int room_message(String body){
-        HttpClient client = new DefaultHttpClient();
-        String url = api + "/rooms/" + room + "/send/m.room.message?access_token=" + token;
-        //Log.i(tag, "url: " + url);
-        HttpPost req = new HttpPost(url);
-        JSONObject msg = new JSONObject();
-        try {
-            msg.put("msgtype", "m.text");
-            msg.put("body", body);
-            StringEntity entity = new StringEntity(msg.toString());
-            req.setEntity(entity);
-            HttpResponse res = client.execute(req);
-            return res.getStatusLine().getStatusCode();
-        } catch(Exception e){
-            Log.e(tag, "e: " + e);
-        }
-        return 0;
-    }
-
     private int post_data(String url, JSONObject data){
         HttpClient client = new DefaultHttpClient();
         HttpPost req = new HttpPost(url);
@@ -135,20 +116,24 @@ public class TADHackService extends Service {
         }
     }
 
-    public void test() {
-        Log.i(tag, "TADHackService#test()");
+    private void room_message(String body){
         String url = api + "/rooms/" + room + "/send/m.room.message?access_token=" + token;
         JSONObject data = new JSONObject();
-        Date date = new Date();
         try {
             data.put("msgtype", "m.text");
-            data.put("body", date.toString());
+            data.put("body", body);
         } catch(Exception e){
             Log.e(tag, "error: " + e);
             return;
         }
         int rc = post_data(url, data);
         Log.i(tag, "rc: " + rc);
+    }
+
+    public void test() {
+        Log.i(tag, "TADHackService#test()");
+        Date date = new Date();
+        room_message(date.toString());
     }
 
 
