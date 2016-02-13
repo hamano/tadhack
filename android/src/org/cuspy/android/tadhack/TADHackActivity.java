@@ -48,15 +48,24 @@ public class TADHackActivity extends Activity
                 }
             };
         findViewById(R.id.stop).setOnClickListener(stopButton);
-        OnClickListener testButton = new OnClickListener() {
+        OnClickListener joinButton = new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(service != null){
-                        service.test();
+                        service.join();
                     }
                 }
             };
-        findViewById(R.id.test).setOnClickListener(testButton);
+        findViewById(R.id.join).setOnClickListener(joinButton);
+        OnClickListener leaveButton = new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(service != null){
+                        service.leave();
+                    }
+                }
+            };
+        findViewById(R.id.leave).setOnClickListener(leaveButton);
     }
 
     /** Defines callbacks for service binding, passed to bindService() */
@@ -84,16 +93,6 @@ public class TADHackActivity extends Activity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case R.id.test_join:
-            if(service != null){
-                service.join();
-            }
-            break;
-        case R.id.test_leave:
-            if(service != null){
-                service.leave();
-            }
-            break;
         case R.id.test_walk:
             if(service != null){
                 service.walk();

@@ -21,9 +21,14 @@
       android:layout_height="wrap_content"
       android:text="Stop" />
   <Button
-      android:id="@+id/test"
+      android:id="@+id/join"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
-      android:text="Test" />
+      android:text="Join" />
+  <Button
+      android:id="@+id/leave"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:text="Leave" />
 </LinearLayout>
 

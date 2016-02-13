@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-  <item android:id="@+id/test_join" android:title="Join" />
-  <item android:id="@+id/test_leave" android:title="Leave" />
   <item android:id="@+id/test_walk" android:title="Walk" />
   <item android:id="@+id/test_run" android:title="run" />
 </menu>
