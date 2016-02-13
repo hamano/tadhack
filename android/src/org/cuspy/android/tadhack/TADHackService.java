@@ -58,8 +58,7 @@ public class TADHackService extends Service {
         api = res.getString(R.string.api);
         token = res.getString(R.string.token);
         room = res.getString(R.string.room);
-        join();
-        room_message("start service");
+        //room_message("start service");
 
         UUID appid = UUID.fromString("3aa69e1a-29e6-43c7-b7af-22a8a3064169");
         receiver = new PebbleKit.PebbleDataReceiver(appid) {
@@ -70,12 +69,14 @@ public class TADHackService extends Service {
                     if(value != null){
                         int action = value.intValue();
                         Log.i(tag, "action: " + action);
+                        join();
                         return;
                     }
                     value = data.getUnsignedIntegerAsLong(1);
                     if(value != null){
                         int state = value.intValue();
                         Log.i(tag, "state change: " + state);
+                        stateChange(state);
                         return;
                     }
                 }
@@ -83,9 +84,24 @@ public class TADHackService extends Service {
         PebbleKit.registerReceivedDataHandler(this, receiver);
     }
 
+    public void stateChange(int state) {
+        switch (state) {
+        case 1:
+            stop();
+            break;
+        case 2:
+            walk();
+            break;
+        case 3:
+            run();
+            break;
+        }
+    }
+    
     @Override
     public void onDestroy() {
         Log.i(tag, "TADHackService#onDestroy()");
+        leave();
         super.onDestroy();
         unregisterReceiver(receiver);
     }
@@ -182,20 +198,10 @@ public class TADHackService extends Service {
 
     public void leave(){
         Log.i(tag, "TADHackService#leave()");
-        HttpClient client = new DefaultHttpClient();
         String url = api + "/rooms/" + room + "/leave?access_token=" + token;
-        HttpPost req = new HttpPost(url);
-        JSONObject msg = new JSONObject();
-        int rc;
-        try {
-            StringEntity entity = new StringEntity(msg.toString());
-            req.setEntity(entity);
-            HttpResponse res = client.execute(req);
-            rc = res.getStatusLine().getStatusCode();
-            Log.i(tag, "rc: " + rc);
-        } catch(Exception e){
-            Log.e(tag, "e: " + e);
-        }
+        JSONObject data = new JSONObject();
+        int rc = post_data(url, data);
+        Log.i(tag, "rc: " + rc);
     }
 
     public void walk(){
