@@ -17,7 +17,9 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.util.EntityUtils;
 
 import org.json.JSONObject;
 import org.json.JSONException;
@@ -109,6 +111,27 @@ public class TADHackService extends Service {
             req.setEntity(entity);
             HttpResponse res = client.execute(req);
             rc = res.getStatusLine().getStatusCode();
+            if(rc != 200){
+                Log.e(tag, "res: " + EntityUtils.toString(res.getEntity()));
+            }
+            return rc;
+        } catch(Exception e){
+            Log.e(tag, "e: " + e);
+            return -1;
+        }
+    }
+    private int put_data(String url, JSONObject data){
+        HttpClient client = new DefaultHttpClient();
+        HttpPut req = new HttpPut(url);
+        int rc;
+        try {
+            StringEntity entity = new StringEntity(data.toString());
+            req.setEntity(entity);
+            HttpResponse res = client.execute(req);
+            rc = res.getStatusLine().getStatusCode();
+            if(rc != 200){
+                Log.e(tag, "res: " + EntityUtils.toString(res.getEntity()));
+            }
             return rc;
         } catch(Exception e){
             Log.e(tag, "e: " + e);
@@ -127,6 +150,18 @@ public class TADHackService extends Service {
             return;
         }
         int rc = post_data(url, data);
+    }
+
+    private void displayname(String name){
+        String url = api + "/profile/%40pebble%3Amatrix.org/displayname?access_token=" + token;
+        JSONObject data = new JSONObject();
+        try {
+            data.put("displayname", name);
+        } catch(Exception e){
+            Log.e(tag, "error: " + e);
+            return;
+        }
+        int rc = put_data(url, data);
         Log.i(tag, "rc: " + rc);
     }
 
@@ -161,5 +196,16 @@ public class TADHackService extends Service {
         } catch(Exception e){
             Log.e(tag, "e: " + e);
         }
+    }
+
+    public void walk(){
+        displayname("pebble(walking)");
+    }
+
+    public void run(){
+        displayname("pebble(running)");
+    }
+    public void stop(){
+        displayname("pebble(stop)");
     }
 }

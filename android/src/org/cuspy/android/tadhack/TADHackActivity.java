@@ -95,10 +95,14 @@ public class TADHackActivity extends Activity
             }
             break;
         case R.id.test_walk:
-            Log.i(tag, "test walk");
+            if(service != null){
+                service.walk();
+            }
             break;
         case R.id.test_run:
-            Log.i(tag, "test run");
+            if(service != null){
+                service.run();
+            }
             break;
         }
         return super.onOptionsItemSelected(item);
