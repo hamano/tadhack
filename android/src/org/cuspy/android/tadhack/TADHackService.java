@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.widget.Toast;
+import android.media.MediaPlayer;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -37,6 +38,7 @@ public class TADHackService extends Service {
     private String token;
     private String room;
     private String api;
+    MediaPlayer mpRun, mpWalk;
 
     public TADHackService() {
         super();
@@ -59,6 +61,9 @@ public class TADHackService extends Service {
         token = res.getString(R.string.token);
         room = res.getString(R.string.room);
         //room_message("start service");
+
+        mpRun = MediaPlayer.create( this, R.raw.run );
+        mpWalk = MediaPlayer.create( this, R.raw.walk );
 
         UUID appid = UUID.fromString("3aa69e1a-29e6-43c7-b7af-22a8a3064169");
         receiver = new PebbleKit.PebbleDataReceiver(appid) {
@@ -205,10 +210,12 @@ public class TADHackService extends Service {
     }
 
     public void walk(){
+        mpWalk.start();
         displayname("pebble(walking)");
     }
 
     public void run(){
+        mpRun.start();
         displayname("pebble(running)");
     }
     public void stop(){
