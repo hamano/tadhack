@@ -1,0 +1,79 @@
+\DeclareOptionBeamer{compress}{\beamer@compresstrue}
+\ProcessOptionsBeamer
+
+\setlength{\leftmargini}{1em}
+
+% define style
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{enumerate items}[default]
+
+\mode<presentation>
+
+\definecolor{black}{rgb}{0,0,0}
+\definecolor{darkred}{rgb}{0.8,0,0}
+\definecolor{darkblue}{HTML}{00438C}
+\definecolor{samuraiblue}{HTML}{1D327D}
+
+\setbeamercolor{separation line}{use=structure,bg=structure.fg!50!bg}
+\setbeamercolor{section in toc}{fg=black,bg=white}
+\setbeamercolor*{palette primary}{fg=black,bg=white!30!white}
+\setbeamercolor*{palette secondary}{fg=black,bg=gray!15!white}
+\setbeamercolor*{palette tertiary}{bg=black,fg=gray!10!white}
+\setbeamercolor*{palette quaternary}{fg=black,bg=gray!5!white}
+
+\setbeamercolor*{titlelike}{parent=palette primary}
+\setbeamercolor{titlelike}{parent=palette primary,fg=black}
+\setbeamercolor{frametitle}{bg=}
+\setbeamercolor{frametitle right}{bg=}
+
+\setbeamercolor*{separation line}{parent=section in head/foot}
+\setbeamercolor*{separation margin}{parent=frametitle}
+
+\setbeamercolor{head}{parent=frametitle}
+\setbeamercolor{foot}{parent=section in head/foot}
+
+\setbeamercolor{separation}{parent=section in head/foot}
+
+\setbeamercolor{item}{fg=samuraiblue}
+\setbeamercolor{navigation symbols dimmed}{fg=white}
+
+\setbeamerfont{text in head}{size=\fontsize{14pt}{0pt}}
+\setbeamerfont{text in foot}{size=\fontsize{11pt}{0pt}}
+
+\setbeamerfont{frametitle}{size=\Large,series=\bfseries}
+\setbeamerfont{title}{size=\Large,series=\bfseries}
+\setbeamerfont{small}{size=\fontsize{12pt}{0pt}}
+
+% define beamertemplate
+\defbeamertemplate{title page}{hamano}{
+  \AddToShipoutPicture*{
+    \put(15,30){
+      %\includegraphics[height=3cm]{./figure/logo.eps}
+    }
+  }
+  \vspace{2em}
+  {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}
+  \vspace{2em}
+  \begin{flushright}
+    \usebeamerfont{small}{
+      \insertauthor\par
+      \insertinstitute\par
+      \insertdate\par
+    }
+  \end{flushright}
+}
+
+\defbeamertemplate*{footline}{hamano}{
+  \begin{beamercolorbox}[colsep=0.5pt]{separation line}
+  \end{beamercolorbox}
+  \vskip 1pt
+  \begin{beamercolorbox}[ht=10pt,dp=4pt,leftskip=.3cm,rightskip=.3cm plus1fil]{foot}
+    \leavevmode
+        {\usebeamerfont{text in foot}\insertshortinstitute}
+        {\hfill}
+        {\usebeamerfont{text in foot}\insertpagenumber}
+  \end{beamercolorbox}
+}
+
+\mode
+<all>
