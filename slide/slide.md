@@ -1,5 +1,5 @@
 ---
-title: Hands-Free messaging
+title: Hands-free messaging
 author: Tsukasa Hamano \<hamano@cuspy.org\>
 institute: TADHack mini Japan 2016
 theme: hamano
