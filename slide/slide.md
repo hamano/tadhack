@@ -27,9 +27,9 @@ Walking Detection
 \includegraphics[width=0.8\textwidth]{images/walk.png}
 
 # How it works\
-Runnning Detection
+Running Detection
 \includegraphics[width=0.8\textwidth]{images/run.png}
 
 # Code
 
-https://github.com/hamano/tadhack
+<https://github.com/hamano/tadhack>
