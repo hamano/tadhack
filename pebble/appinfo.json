@@ -1,0 +1,18 @@
+{
+  "uuid": "3aa69e1a-29e6-43c7-b7af-22a8a3064169",
+  "shortName": "handfree",
+  "longName": "handfree",
+  "companyName": "hamano",
+  "versionLabel": "1.0",
+  "sdkVersion": "3",
+  "targetPlatforms": ["aplite"],
+  "watchapp": {
+    "watchface": false
+  },
+  "appKeys": {
+    "dummy": 0
+  },
+  "resources": {
+    "media": []
+  }
+}
